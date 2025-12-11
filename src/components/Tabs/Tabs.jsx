@@ -18,14 +18,18 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
               <a
                 href={`#${tab.id}`}
                 data-cy="TabLink"
-                onClick={() => {
+                onClick={e => {
+                  e.preventDefault();
                   if (tab.id !== activeTab.id) {
                     onTabSelected(tab.id);
                   }
                 }}
                 onKeyDown={e => {
                   if (e.key === 'Enter') {
-                    onTabSelected(tab.id);
+                    e.preventDefault();
+                    if (tab.id !== activeTab.id) {
+                      onTabSelected(tab.id);
+                    }
                   }
                 }}
               >
